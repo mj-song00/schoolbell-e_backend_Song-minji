@@ -4,7 +4,7 @@
 //2. 최댓값(max) == 0
 //3. 반복문
 //   i=0; i< list길이까지, i++
-//     j=0; j < i까지 j++
+//     j=0; j < list길이까지 j++
 //      만약 towDigits[i] * threeDigitis[j] > Max
 //       Max = towDigits[i] * threeDigitis[j]
 //   return Max;
@@ -12,10 +12,10 @@
 function findMax(list: number[]): number {
   let max: number = 0;
 
-  //두자릿수 숫자 만들기
   for (let i = 0; i < list.length; i++) {
     for (let j = 0; j < list.length; j++) {
       if (i !== j) {
+        //두자릿수 숫자 만들기
         const num1: number = parseInt(list[i].toString() + list[j].toString());
 
         //세자리 숫자 만들기
