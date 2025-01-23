@@ -1,7 +1,18 @@
-/*
-sql enum colunm https://feastforall.tistory.com/215
-varchar 와 text https://medium.com/daangn/varchar-vs-text-230a718a22a1
+
+
+/**
+문제 : MySQL 또는 PostgreSQL을 사용하여 여러 단계의 승인 및 반려가 가능한 결제 시스템을 구축하는 시나리오에서,
+1. 필요한 테이블을 최소로 정의해 주세요.
+2. 특정 사용자가 처리해야 할 결제건을 나열하는 query를 작성해주세요
+
 */
+
+SELECT approval_id, approval.progress_date, approval.comment, approval.draft_id, approval.next_approver, approval.status
+from school.approval
+join school.draft on approval.draft_id = draft.draft_id
+where approval.next_approver = :user_id
+and approval.status = 'pending';
+
 
 Table draft {
   id integer [primary key, auto increment]
@@ -69,27 +80,4 @@ next_approvaler 다음 결제자
  */
 
 
--- user 생성 query 예시
--- insert into school.users(username, password,role)
--- value ('대리2','password1234','assistant_manager');
-
-
--- draft 작성 쿼리  예시
--- insert into school.draft(title, contents, created_at, drafat_number, draft_status, user_id, approver)
--- values ('기안서1', '기안서1 내용', '2025-01-21','2025-0121-0001','pending',1,2);
-/*
-draft.approver는 최초의 승인자가 누군인지 알려주는 column입니다. 
-*/
-
--- approval 작성쿼리  예시
--- insert into school.approval(progress_date,comment, approver_user, draft_id, next_approver,status)
--- values('2025-01-21','결제완료',2,2,3,'pending');
-
--- 마지막 결제 승인자 예시
--- insert into school.approval(progress_date,comment, approver_user, draft_id, next_approver,status)
--- values('2025-01-21','승인완료',2 , 2, null, 'approval');
-
--- reject 작성쿼리  예시
--- insert into school.approval(progress_date,comment, approver_user, draft_id, next_approver,status)
--- values('2025-01-21','승인거절',2 , 2, 1, 'reject');
 
