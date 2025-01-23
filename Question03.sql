@@ -69,27 +69,27 @@ next_approvaler 다음 결제자
  */
 
 
-user 생성 query 예시
-insert into school.users(username, password,role)
-value ('대리2','password1234','assistant_manager');
+-- user 생성 query 예시
+-- insert into school.users(username, password,role)
+-- value ('대리2','password1234','assistant_manager');
 
 
-draft 작성 쿼리  예시
-insert into school.draft(title, contents, created_at, drafat_number, draft_status, user_id, approver)
-values ('기안서1', '기안서1 내용', '2025-01-21','2025-0121-0001','pending',1,2);
+-- draft 작성 쿼리  예시
+-- insert into school.draft(title, contents, created_at, drafat_number, draft_status, user_id, approver)
+-- values ('기안서1', '기안서1 내용', '2025-01-21','2025-0121-0001','pending',1,2);
 /*
 draft.approver는 최초의 승인자가 누군인지 알려주는 column입니다. 
 */
 
-approval 작성쿼리  예시
-insert into school.approval(progress_date,comment, approver_user, draft_id, next_approver,status)
-values('2025-01-21','결제완료',2,2,3,'pending');
+-- approval 작성쿼리  예시
+-- insert into school.approval(progress_date,comment, approver_user, draft_id, next_approver,status)
+-- values('2025-01-21','결제완료',2,2,3,'pending');
 
-마지막 결제 승인자 예시
-insert into school.approval(progress_date,comment, approver_user, draft_id, next_approver,status)
-values('2025-01-21','승인완료',2 , 2, null, 'approval');
+-- 마지막 결제 승인자 예시
+-- insert into school.approval(progress_date,comment, approver_user, draft_id, next_approver,status)
+-- values('2025-01-21','승인완료',2 , 2, null, 'approval');
 
-reject 작성쿼리  예시
-insert into school.approval(progress_date,comment, approver_user, draft_id, next_approver,status)
-values('2025-01-21','승인거절',2 , 2, 1, 'reject');
+-- reject 작성쿼리  예시
+-- insert into school.approval(progress_date,comment, approver_user, draft_id, next_approver,status)
+-- values('2025-01-21','승인거절',2 , 2, 1, 'reject');
 

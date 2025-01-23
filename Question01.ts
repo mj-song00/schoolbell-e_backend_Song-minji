@@ -8,9 +8,21 @@
 //      만약 towDigits[i] * threeDigitis[j] > Max
 //       Max = towDigits[i] * threeDigitis[j]
 //   return Max;
+import * as fs from "fs";
 
-function findMax(list: number[]): number {
+const filePath = "Question01.txt";
+
+const data = fs.readFileSync(filePath, "utf-8");
+
+const numbers = data.split(",").map((num) => parseInt(num.trim(), 10));
+
+const result = findMax(numbers);
+console.log(`result : ${result.num1}, ${result.num2}`);
+
+function findMax(list: number[]): { num1: number; num2: number } {
   let max: number = 0;
+  let maxNum1 = 0;
+  let maxNum2 = 0;
 
   for (let i = 0; i < list.length; i++) {
     for (let j = 0; j < list.length; j++) {
@@ -26,12 +38,13 @@ function findMax(list: number[]): number {
 
         const multi = num1 * num2;
 
-        max = Math.max(max, multi);
+        if (multi > max) {
+          max = multi;
+          maxNum1 = num1;
+          maxNum2 = num2;
+        }
       }
     }
   }
-  return max;
+  return { num1: maxNum1, num2: maxNum2 };
 }
-
-const list: number[] = [1, 3, 5, 7, 9];
-console.log(findMax(list));
